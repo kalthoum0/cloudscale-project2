@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudScale Project</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f7fb; text-align: center; padding-top: 120px; }
+        .card { background: white; width: 600px; margin: auto; padding: 40px; border-radius: 12px; }
+        h1 { color: #0078d4; }
+
+        .card { display: none; }
+        .card.show { display: block; animation: pop-in 0.5s ease; }
+
+        @keyframes pop-in {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #revealBtn {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 120, 212, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #revealBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5);
+        }
+
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="confettiCanvas"></canvas>
+
+    <button type="button" id="revealBtn">🎉 Click to Reveal</button>
+
+    <div class="card" id="card">
+        <h1>Hello from CloudScale!</h1>
+        <p>This app is running inside a Docker container on an Azure VM.</p>
+        <h2>Created by: Rawan Eltheni 4753 and Kalthoum Alatrash 4853</h2>
+    </div>
+
+    <script>
+        const btn = document.getElementById('revealBtn');
+        const card = document.getElementById('card');
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const colors = ['#0078d4', '#ff595e', '#ffca3a', '#8ac926', '#6a4c93', '#ff924c'];
+        let particles = [];
+        let animating = false;
+
+        function spawnConfetti(count) {
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: -20 - Math.random() * canvas.height * 0.5,
+                    w: 6 + Math.random() * 8,
+                    h: 8 + Math.random() * 10,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedY: 2 + Math.random() * 4,
+                    speedX: -1.5 + Math.random() * 3,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: -6 + Math.random() * 12
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.rotationSpeed;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+            });
+            particles = particles.filter(p => p.y < canvas.height + 30);
+            if (particles.length > 0) {
+                requestAnimationFrame(animate);
+            } else {
+                animating = false;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            card.classList.add('show');
+            spawnConfetti(200);
+            if (!animating) {
+                animating = true;
+                requestAnimationFrame(animate);
+            }
+        });
+    </script>
+</body>
+</html>
