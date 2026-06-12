@@ -270,56 +270,6 @@ When a push is made to the `main` branch, the workflow pauses before running `te
 
 ---
 
-## 7. Screenshots
-
-### 7.1 Docker Image Build Successful
-
-![Docker Image Build Successful](screenshots/01-docker-build.png)
-
----
-
-### 7.2 Docker Image Pushed to Docker Hub
-
-![Docker Image Pushed to Docker Hub](screenshots/02-dockerhub-push.png)
-
----
-
-### 7.3 Terraform Plan Output
-
-![Terraform Plan Output](screenshots/03-terraform-plan.png)
-
----
-
-### 7.4 Terraform Apply Output
-
-![Terraform Apply Output](screenshots/04-terraform-apply.png)
-
----
-
-### 7.5 GitHub Actions Workflow Showing Successful Plan on Pull Request
-
-![GitHub Actions Plan on Pull Request](screenshots/05-github-actions-plan-pr.png)
-
----
-
-### 7.6 GitHub Actions Workflow Showing Approved Apply
-
-![GitHub Actions Approved Apply](screenshots/06-github-actions-approved-apply.png)
-
----
-
-### 7.7 Browser Showing the Containerized Web App
-
-![Browser Showing Web App](screenshots/07-browser-web-app.png)
-
----
-
-### 7.8 Azure Portal Showing Resource Group and Resources
-
-![Azure Portal Resources](screenshots/08-azure-portal-resources.png)
-
----
-
 ## 8. Step-by-Step Detailed Solution
 
 ### Step 1: Create the Web Application
