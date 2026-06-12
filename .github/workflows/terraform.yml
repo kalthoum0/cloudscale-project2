@@ -13,7 +13,7 @@ env:
   TF_IN_AUTOMATION: true
   TF_VAR_student_name: "student1-student2"
   TF_VAR_environment: "production"
-  TF_VAR_location: "eastus"
+  TF_VAR_location: "switzerlandnorth"
   TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
   TF_VAR_docker_image: ${{ secrets.DOCKERHUB_USERNAME }}/cloudscale-web:latest
 
