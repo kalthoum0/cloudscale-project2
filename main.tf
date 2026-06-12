@@ -80,7 +80,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                  = "vm-${local.name_prefix}"
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
-  size                  = "Standard_B1s"
+  size                  = var.vm_size
   admin_username        = var.admin_username
   tags                  = local.common_tags
   network_interface_ids = [azurerm_network_interface.nic.id]
