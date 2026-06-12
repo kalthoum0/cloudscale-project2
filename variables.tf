@@ -15,5 +15,9 @@ variable "admin_username" {
   type    = string
   default = "azureuser"
 }
+variable "vm_size" {
+  type    = string
+  default = "Standard_B2ats_v2"
+}
 variable "ssh_public_key" { type = string }
 variable "docker_image" { type = string }
